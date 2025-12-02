@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block contents %}
+<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>CATEGORY</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">ABOUT US</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+ <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>{{category.name}}</h1>
+                        <p>{{category.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+<div class="d-flex justify-content-center mb-5 mt-5">
+    <img src="{{category.image.url}}" height="450px" class="w-50" >
+</div>
+  <div class="row">
+                <div class="col-lg-12">
+                    <div class="special-menu text-center">
+                        <div class="button-group filter-button-group">
+                            <button class="active" data-filter="*">All</button>
+                            <button data-filter=".top-featured">Top featured</button>
+                            <button data-filter=".best-seller">Best seller</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="row special-list container">
+{% for i in category.products.all %}
+
+                <div class="col-lg-3 col-md-6 special-grid best-seller ">
+                    <div class="products-single fix container">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="{{i.image.url}}" class="img-fluid card" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                    <a class="cart" href="{% url 'shop:productdetail' i.id%}">view more</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{i.name}}</h4>
+                            <h5><i class="fa-solid fa-indian-rupee-sign"></i>{{i.price}}</h5>
+                        </div>
+                    </div>
+                </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

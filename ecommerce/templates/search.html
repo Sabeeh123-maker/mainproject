@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block contents %}
+ <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Search Results </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+
+            <div class="row special-list container border border-dark p-5 mb-5 mx-auto d-flex">
+                <h1>You have searched for {{query}}</h1>
+                {% for i in p %}
+                <div class="col-lg-3 col-md-6 special-grid best-seller d-flex">
+                    <div class="products-single fix container">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="{{i.image.url}}" class="img-fluid card" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                    <a class="cart" href="{% url 'shop:productdetail' i.id%}">view more</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{i.name}}</h4>
+                            <h5><i class="fa-solid fa-indian-rupee-sign"></i>{{i.price}}</h5>
+                            <h5>Stock:&nbsp<span class="text-danger">{{i.stock}}</span></h5>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <h3 class="d-flex justify-content-center text-danger">No Results</h3>
+                {% endfor %}
+            </div>
+
+
+
+{% endblock %}
