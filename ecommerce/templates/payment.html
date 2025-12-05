@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block contents %}
+{% if payment %}
 <form action="{% url 'cart:paymentsuccess' %}" method="POST">
 <script
    src="https://checkout.razorpay.com/v1/checkout.js"
@@ -20,4 +21,7 @@
     </div>
 
 </form>
+{% else %}
+<h1>Ordered Successfully</h1>
+{% endif %}
 {% endblock %}

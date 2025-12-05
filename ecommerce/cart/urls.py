@@ -10,4 +10,5 @@ urlpatterns = [
     path('deleteproduct/<int:i>', views.DeleteProduct.as_view(), name='dltpdt'),
     path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('paymentsuccess/', views.Paymentsuccess.as_view(), name='paymentsuccess'),
+    path('orderdetail/', views.OrderDetailView.as_view(), name='orderdetail'),
 ]
