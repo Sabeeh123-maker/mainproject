@@ -1,4 +1,8 @@
+
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
+from django.utils.decorators import method_decorator
 from django.views import View
 from shop.models import Category,Product
 from django.contrib import messages
@@ -65,6 +69,15 @@ class Logoutview(View):
         logout(request)
         return redirect('shop:login')
 
+def admin_required(function):
+    def wrapper(request):
+        if not request.user.is_superuser:
+            return HttpResponse('You need to be an admin', 403)
+        else:
+            return function(request)
+    return wrapper
+@method_decorator(admin_required,name='dispatch')
+@method_decorator(login_required,name='dispatch')
 class AddProduct(View):
     def get(self, request):
         form_instance = AddProductForm()
@@ -78,6 +91,8 @@ class AddProduct(View):
             form_instance.save()
             return redirect('shop:addproduct')
 
+@method_decorator(admin_required,name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class AddCategory(View):
     def get(self, request):
         form_instance = AddCategoryForm()
@@ -91,6 +106,8 @@ class AddCategory(View):
             form_instance.save()
             return redirect('shop:addcategory')
 
+@method_decorator(admin_required,name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class AddStock(View):
     def get(self, request,i):
         p=Product.objects.get(id=i)

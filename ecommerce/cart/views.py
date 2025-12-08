@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
@@ -11,6 +12,7 @@ import uuid
 
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class AddCartView(View):
     def get(self, request,i):
         p=Product.objects.get(id=i)
@@ -42,6 +44,7 @@ class DecrementCartView(View):
             c.save()
         else:
             c.delete()
+
 
         return redirect('cart:cartview')
 class DeleteProduct(View):
