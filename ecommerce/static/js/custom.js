@@ -212,5 +212,9 @@
 		cursorcolor: "#9b9b9c",
 	});
 	
-	
+	AOS.init({
+  duration: 800,   // animation duration in ms
+  easing: 'slide', // easing type
+  once: true       // whether animation should happen only once
+});
 }(jQuery));
